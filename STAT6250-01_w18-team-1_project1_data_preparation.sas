@@ -108,7 +108,7 @@ minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
 data homicide_analytic_file;
     retain
-        Record_ID
+                Record_ID
 		Agency_Code
 		Agency_Name
 		Agency_Type
@@ -131,7 +131,7 @@ data homicide_analytic_file;
 		Weapon
     ;
     keep
-        Record_ID
+                Record_ID
 		Agency_Code
 		Agency_Name
 		Agency_Type
