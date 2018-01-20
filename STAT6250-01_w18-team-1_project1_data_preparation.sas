@@ -16,18 +16,18 @@ This file prepares the dataset described below for analysis.
 
 [Data Source] The file 
 https://www.kaggle.com/murderaccountability/homicide-reports/downloads/
-database.csv was downloaded and edited to produce file Homicide_Dataset.xlsx by 
-deleting 521895 rows from worksheet "database",reformatting column headers 
-in "database" to remove characters disallowed in SAS variable names, and setting
-all cell values to "Text" format.
+database.csv was downloaded and edited to produce file Homicide_Dataset.xlsx 
+by deleting 521895 rows from worksheet "database",reformatting column headers 
+in "database" to remove characters disallowed in SAS variable names, and 
+setting all cell values to "Text" format.
 
 [Data Dictionary] 
 Record ID: Dataset unique identifier
 Agency Code/Name/Type: Law enforcement Agency who handled the case
 State/City: State and County of the reported homicide
 Year/Month: Time stamp for the occurrence of the homicide
-Incident: Number of offenses committed by the same offender(s) at the same time 
-and place
+Incident: Number of offenses committed by the same offender(s) at the same 
+time and place
 Crime Type: Murder, Manslaughter or Negligence designated to case
 Crime Solved: Conveys whether the case has been solved or not
 Victim Sex/Age/Race/Ethnicity: Victim profile
@@ -108,8 +108,7 @@ minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
 data homicide_analytic_file;
     retain
-   
-		Record_ID
+        Record_ID
 		Agency_Code
 		Agency_Name
 		Agency_Type
@@ -132,8 +131,7 @@ data homicide_analytic_file;
 		Weapon
     ;
     keep
-        
-		Record_ID
+        Record_ID
 		Agency_Code
 		Agency_Name
 		Agency_Type
