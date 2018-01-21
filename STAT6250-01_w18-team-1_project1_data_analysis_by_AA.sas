@@ -46,7 +46,7 @@ footnote2
 ;
 
 footnote3
-'Based on the above output, California ranks highest with the  most number of male as well as female homicide victims.'
+'Based on the above output, California ranks highest with the most number of male as well as female homicide victims.'
 ;
 
 footnote4
