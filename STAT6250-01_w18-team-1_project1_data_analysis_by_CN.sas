@@ -90,7 +90,6 @@ footnote2
 footnote3
 'Based on the above output, the homicides also often happen between wife-husbands, and friends.'
 ;
-
 *
 Methodology: Use PROC FREQ to generate a dataset with the counts of homicide by 
 relationship, and then use PROC SORT to sort data by descending.
