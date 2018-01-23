@@ -45,8 +45,6 @@ Record Source: Database source from either FBI or FOIA
 
 * environmental setup;
 
-* create output formats;
-
 
 * setup environmental parameters;
 %let inputDatasetURL =
