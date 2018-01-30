@@ -81,6 +81,7 @@ https://github.com/stat6250/team-1_project1/blob/master/Homicide_Dataset.xlsx?ra
             %put Dataset &dsn. already exists. Please delete and try again.;
         %end;
 %mend;
+
 %loadDataIfNotAlreadyAvailable(
     homicide_raw,
     &inputDatasetURL.,
@@ -90,14 +91,13 @@ https://github.com/stat6250/team-1_project1/blob/master/Homicide_Dataset.xlsx?ra
 
 * check raw homicide dataset for duplicates with respect to its primary key;
 proc sort
-        nodupkey
-        data=homicide_raw
-        dupout=homicide_raw_dups
-        out=_null_
+    nodupkey
+    data=homicide_raw
+    dupout=homicide_raw_dups
+    out=_null_
     ;
     by
-        
-		Record_ID
+        Record_ID
     ;
 run;
 
@@ -107,52 +107,52 @@ minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
 data homicide_analytic_file;
     retain
-                Record_ID
-		Agency_Code
-		Agency_Name
-		Agency_Type
-		City
-		State
-		Year
-		Month
-		Incident
-		Crime_Type
-		Crime_Solved
-		Victim_Sex
-		Victim_Age
-		Victim_Race
-		Victim_Ethnicity
-		Perpetrator_Sex
-		Perpetrator_Age
-		Perpetrator_Race
-		Perpetrator_Ethnicity
-		Relationship
-		Weapon
+        Record_ID
+        Agency_Code
+        Agency_Name
+        Agency_Type
+        City
+        State
+        Year
+        Month
+        Incident
+        Crime_Type
+        Crime_Solved
+        Victim_Sex
+        Victim_Age
+        Victim_Race
+        Victim_Ethnicity
+        Perpetrator_Sex
+        Perpetrator_Age
+        Perpetrator_Race
+        Perpetrator_Ethnicity
+        Relationship
+        Weapon
     ;
     keep
-                Record_ID
-		Agency_Code
-		Agency_Name
-		Agency_Type
-		City
-		State
-		Year
-		Month
-		Incident
-		Crime_Type
-		Crime_Solved
-		Victim_Sex
-		Victim_Age
-		Victim_Race
-		Victim_Ethnicity
-		Perpetrator_Sex
-		Perpetrator_Age
-		Perpetrator_Race
-		Perpetrator_Ethnicity
-		Relationship
-		Weapon
+        Record_ID
+        Agency_Code
+        Agency_Name
+        Agency_Type
+        City
+        State
+        Year
+        Month
+        Incident
+        Crime_Type
+        Crime_Solved
+        Victim_Sex
+        Victim_Age
+        Victim_Race
+        Victim_Ethnicity
+        Perpetrator_Sex
+        Perpetrator_Age
+        Perpetrator_Race
+        Perpetrator_Ethnicity
+        Relationship
+        Weapon
     ;
-    set homicide_raw;
+    set 
+        homicide_raw
+    ;
 run;
-
-
