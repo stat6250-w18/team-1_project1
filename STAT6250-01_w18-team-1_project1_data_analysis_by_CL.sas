@@ -64,7 +64,7 @@ run;
 
 proc means 
     data=homicide_analytic_file 
-        mean median min q1 q3 max
+    mean median min q1 q3 max
     ;
     var 
         perpetrator_age
@@ -107,44 +107,15 @@ Possible Follow-up Steps: Examine homicide rates at the State level and
 compare ratios of solved crimes, omitting areas with few counts of 
 homicide. 
 ;
-proc freq 
-    data=homicide_analytic_file 
-        noprint
-    ;
-    table
-        agency_name*crime_solved / out=FreqCount TOTPCT OUTPCT list
-    ;
-run;
-
-proc sort 
-    data=FreqCount 
-        out=FreqCount_Asc
-    ; 
-    by 
-        PCT_ROW
-    ;
-run;
-
-proc sort 
-    data=FreqCount 
-        out=FreqCount_Desc
-    ; 
-    by 
-        descending PCT_ROW
-    ;
-run;
-
 proc print 
-    data=FreqCount_Asc 
-        (obs=5)
+    data=homicide_freq_asc (obs=5)
     ; 
     where 
         crime_solved="Yes"
     ;
 run;
 proc print 
-    data=FreqCount_Desc 
-        (obs=5)
+    data=homicide_freq_desc (obs=5)
     ;
     where 
         crime_solved="Yes"
@@ -192,7 +163,8 @@ proc freq
     ;
     table 
         weapon 
-        crime_type/ list
+        crime_type
+        / list
     ;
 run;
 
@@ -200,7 +172,8 @@ proc freq
     data=homicide_analytic_file
     ;
     table 
-        weapon*crime_type/ nocol norow nocum 
+        weapon*crime_type
+        / nocol norow nocum 
     ;
 run;
 
@@ -208,7 +181,8 @@ proc freq
     data=homicide_analytic_file
     ;
     table 
-        state*weapon/ nocol norow nocum 
+        state*weapon
+        / nocol norow nocum 
     ;
 run;
 title;

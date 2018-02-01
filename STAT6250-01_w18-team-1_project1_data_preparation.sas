@@ -154,3 +154,39 @@ data homicide_analytic_file;
     ;
     set homicide_raw;
 run;
+
+* 
+Use PROC FREQ to compute the frequency and percentage of subcategories, and 
+output the results to a temporary dataset, and use PROC SORT
+to extract and sort by row percentages in both ascending and descending 
+order of the temporary dateset, which will be used as
+part of data analysis by CL.
+;
+
+proc freq 
+    data=homicide_analytic_file 
+    noprint
+    ;
+    table
+        agency_name*crime_solved 
+        / out=homicide_analytic_file_freq TOTPCT OUTPCT list
+    ;
+run;
+
+proc sort 
+    data=homicide_analytic_file_freq 
+    out=homicide_freq_asc
+    ; 
+    by 
+        PCT_ROW
+    ;
+run;
+
+proc sort 
+    data=homicide_analytic_file_freq 
+    out=homicide_freq_desc
+    ; 
+    by 
+        descending PCT_ROW
+    ;
+run;
