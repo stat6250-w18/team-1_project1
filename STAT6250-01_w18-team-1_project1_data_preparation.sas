@@ -152,7 +152,5 @@ data homicide_analytic_file;
         Relationship
         Weapon
     ;
-    set 
-        homicide_raw
-    ;
+    set homicide_raw;
 run;
