@@ -108,16 +108,14 @@ compare ratios of solved crimes, omitting areas with few counts of
 homicide. 
 ;
 proc print 
-    data=FreqCount_Asc 
-        (obs=5)
+    data=homicide_freq_asc (obs=5)
     ; 
     where 
         crime_solved="Yes"
     ;
 run;
 proc print 
-    data=FreqCount_Desc 
-        (obs=5)
+    data=homicide_freq_desc (obs=5)
     ;
     where 
         crime_solved="Yes"
