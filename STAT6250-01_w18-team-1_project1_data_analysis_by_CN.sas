@@ -30,7 +30,7 @@ title1
 ;
 
 title2
-'Rationale: This would help to understand at which states homicides happen the most.'
+'Rationale: This would help to understand at which states homicides happen the most, and thus the plan on police allocation could be made properly.'
 ;
 
 footnote1
@@ -48,22 +48,22 @@ changes or patterns.
 ;
 proc freq
         data=homicide_analytic_file
+		    noprint
     ;
     table
-        State / out=FreqCount  list
+        State / out=FreqCountState  list
     ;
 run;
 proc sort
-    data=FreqCount
-	    out=FreqCount_Desc
+    data=FreqCountState
+	    out=FreqCountState_Desc
 	;
 	by
 	    descending percent
 	;
 run;
 proc print
-    data=FreqCount_Desc 
-        (obs=5)
+    data=FreqCountState_Desc (obs=5)        
 	;
 run;
 title;
@@ -97,11 +97,12 @@ relationship, and then use PROC SORT to sort data by descending.
 Limitations: This methodology does not account for states with missing data,
 nor does it attempt to validate data in any way. 
 
-Possible Follow-up Steps: Study why there are so many "unknown" relationships in homicide cases.
-
+Possible Follow-up Steps: Study why there are so many "unknown" relationships
+in homicide cases.
 ;
 proc freq
         data=homicide_analytic_file
+		    noprint
     ;
     table
         Relationship / out=FreqCountRel  list
@@ -116,8 +117,7 @@ proc sort
 	;
 run;
 proc print
-    data=FreqCountRel_Desc 
-        (obs=5)
+    data=FreqCountRel_Desc (obs=5)        
 	;
 run;
 title;
@@ -130,17 +130,16 @@ title1
 ;
 
 title2
-'Rationale: This would help to identify understand the performance of solving homicides at each state of all time.'
+'Rationale: This would help to identify the performance of solving homicides at each state of all time.'
 ;
 
 footnote1
-'Based on the above output, California and Texas are the top two states that successfully solved homicide cases, accouting for roughly 18 percent in total.'
+'Based on the above output, California and Texas are the top two states that successfully solved homicide cases, nearly 11 percent and 7 percent respectivey.'
 ;
 
 footnote2
 'Based on the above output, Vermont is the state that has lowest rate of solving homicide cases with 0.03 percent.'
 ;
-
 *
 Methodology: Use PROC FREQ to generate a dataset with the counts of homicide by 
 state and crime solved, and then use PROC SORT to sort data by descending.
@@ -150,7 +149,7 @@ nor does it attempt to validate data in any way.
 
 Possible Follow-up Steps: More carefully clean the values of the variable
 Crime_Solved so that the statistics computed do not include any
-possible illegal values, and better handle missing data..
+possible illegal values, and better handle missing data.
 ;
 proc freq 
     data=homicide_analytic_file 
