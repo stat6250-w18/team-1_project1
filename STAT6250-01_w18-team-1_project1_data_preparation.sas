@@ -165,16 +165,17 @@ part of data analysis by CL.
 
 proc freq 
     data=homicide_analytic_file 
-        noprint
+    noprint
     ;
     table
-        agency_name*crime_solved / out=FreqCount TOTPCT OUTPCT list
+        agency_name*crime_solved 
+        / out=homicide_analytic_file_freq TOTPCT OUTPCT list
     ;
 run;
 
 proc sort 
-    data=FreqCount 
-        out=FreqCount_Asc
+    data=homicide_analytic_file_freq 
+    out=homicide_freq_asc
     ; 
     by 
         PCT_ROW
@@ -182,8 +183,8 @@ proc sort
 run;
 
 proc sort 
-    data=FreqCount 
-        out=FreqCount_Desc
+    data=homicide_analytic_file_freq 
+    out=homicide_freq_desc
     ; 
     by 
         descending PCT_ROW
