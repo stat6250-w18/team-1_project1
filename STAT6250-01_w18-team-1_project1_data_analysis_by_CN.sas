@@ -37,8 +37,8 @@ footnote1
 'Based on the above output, homicides happen the most at California, New York, Texas, Florida and Michigan.'
 ;
 *
-Methodology: Use PROC FREQ to generate a dataset with the counts of homicide by 
-state, and then use PROC SORT to sort data by descending.
+Methodology: Use PROC PRINT to print just the first five observations from
+the temporary dataset created in the corresponding data-prep file.
 
 Limitations: This methodology does not account for states with missing data,
 nor does it attempt to validate data in any way. 
@@ -46,22 +46,6 @@ nor does it attempt to validate data in any way.
 Possible Follow-up Steps: Study the homicides by year at each state to see the
 changes or patterns.
 ;
-proc freq
-        data=homicide_analytic_file
-		    noprint
-    ;
-    table
-        State / out=FreqCountState  list
-    ;
-run;
-proc sort
-    data=FreqCountState
-	    out=FreqCountState_Desc
-	;
-	by
-	    descending percent
-	;
-run;
 proc print
     data=FreqCountState_Desc (obs=5)        
 	;
@@ -91,8 +75,8 @@ footnote3
 'Based on the above output, the homicides also often happen between wife-husbands, and friends.'
 ;
 *
-Methodology: Use PROC FREQ to generate a dataset with the counts of homicide by 
-relationship, and then use PROC SORT to sort data by descending.
+Methodology: Use PROC PRINT to print just the first five observations from
+the temporary dataset created in the corresponding data-prep file.
 
 Limitations: This methodology does not account for states with missing data,
 nor does it attempt to validate data in any way. 
@@ -100,22 +84,6 @@ nor does it attempt to validate data in any way.
 Possible Follow-up Steps: Study why there are so many "unknown" relationships
 in homicide cases.
 ;
-proc freq
-        data=homicide_analytic_file
-		    noprint
-    ;
-    table
-        Relationship / out=FreqCountRel  list
-    ;
-run;
-proc sort
-    data=FreqCountRel
-	    out=FreqCountRel_Desc
-	;
-	by
-	    descending percent
-	;
-run;
 proc print
     data=FreqCountRel_Desc (obs=5)        
 	;
@@ -141,8 +109,8 @@ footnote2
 'Based on the above output, Vermont is the state that has lowest rate of solving homicide cases with 0.03 percent.'
 ;
 *
-Methodology: Use PROC FREQ to generate a dataset with the counts of homicide by 
-state and crime solved, and then use PROC SORT to sort data by descending.
+Methodology: Use PROC PRINT to generate a dataset with the counts of homicide by 
+state and crime solved.
 
 Limitations: This methodology does not account for states with missing data,
 nor does it attempt to validate data in any way. 
@@ -151,23 +119,6 @@ Possible Follow-up Steps: More carefully clean the values of the variable
 Crime_Solved so that the statistics computed do not include any
 possible illegal values, and better handle missing data.
 ;
-proc freq 
-    data=homicide_analytic_file 
-        noprint
-    ;
-    table
-        state*crime_solved 
-        / out=State_Crime_Solved list
-    ;
-run;
-proc sort 
-    data=State_Crime_Solved
-        out=State_Crime_Solved_Desc
-    ; 
-    by 
-        descending percent
-    ;
-run;
 proc print 
     data=State_Crime_Solved_Desc
     ;
