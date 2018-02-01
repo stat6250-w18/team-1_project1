@@ -64,7 +64,7 @@ run;
 
 proc means 
     data=homicide_analytic_file 
-        mean median min q1 q3 max
+    mean median min q1 q3 max
     ;
     var 
         perpetrator_age
@@ -165,7 +165,8 @@ proc freq
     ;
     table 
         weapon 
-        crime_type/ list
+        crime_type
+        / list
     ;
 run;
 
@@ -173,7 +174,8 @@ proc freq
     data=homicide_analytic_file
     ;
     table 
-        weapon*crime_type/ nocol norow nocum 
+        weapon*crime_type
+        / nocol norow nocum 
     ;
 run;
 
@@ -181,7 +183,8 @@ proc freq
     data=homicide_analytic_file
     ;
     table 
-        state*weapon/ nocol norow nocum 
+        state*weapon
+        / nocol norow nocum 
     ;
 run;
 title;
