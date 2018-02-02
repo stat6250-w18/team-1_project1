@@ -155,6 +155,7 @@ data homicide_analytic_file;
     set homicide_raw;
 run;
 
+
 * 
 Use PROC FREQ to compute the frequency and percentage of subcategories, and 
 output the results to a temporary dataset, and use PROC SORT
@@ -188,5 +189,104 @@ proc sort
     ; 
     by 
         descending PCT_ROW
+    ;
+run;
+
+
+* 
+Use PROC FREQ to compute the frequency and percentage of subcategories like 
+Victim_Sex, Victim_Race, Victim_Ethnicity state wise and output the results to
+a temporary dataset, and use PROC SORT to extract and sort by row percentages
+in descending order of the temporary dateset, which will be used as part of 
+data analysis by AA.
+;
+
+proc freq 
+    data=homicide_analytic_file 
+	noprint
+    ;
+    table
+        Victim_Sex*State 
+		/ out=homicide_analytic_file_freq_sex 
+    ;
+run;
+
+proc sort 
+    data=homicide_analytic_file_freq_sex 
+    out=homicide_freq_sex_M
+    ; 
+	where
+	    Victim_Sex = 'Male'
+	;
+    by 
+        descending COUNT
+    ;
+run;
+
+proc sort 
+    data=homicide_analytic_file_freq_sex 
+    out=homicide_freq_sex_F
+    ; 
+	where
+	    Victim_Sex = 'Female'
+	;
+    by 
+        descending COUNT
+    ;
+run;
+
+proc freq 
+    data=homicide_analytic_file 
+	noprint
+    ;
+    table
+        Victim_Race*State 
+        / out=homicide_freq_victim_race 
+    ;
+run;
+
+proc freq 
+    data=homicide_analytic_file 
+	noprint
+    ;
+    table
+        Victim_Ethnicity*State 
+        / out=homicide_freq_victim_ethnicity
+    ;
+run;
+
+proc sort 
+    data=homicide_freq_victim_race 
+    out=homicide_freq_victim_white
+    ; 
+	where
+	    Victim_Race = 'White'
+	;
+    by 
+        descending COUNT
+    ;
+run;
+
+proc sort 
+    data=homicide_freq_victim_race 
+    out=homicide_freq_victim_black
+    ; 
+	where
+	    Victim_Race = 'Black'
+	;
+    by 
+        descending COUNT
+    ;
+run;
+
+proc sort 
+    data=homicide_freq_victim_ethnicity 
+    out=homicide_freq_victim_nonhispanic
+    ; 
+	where
+	    Victim_Ethnicity = 'Not Hispanic'
+	;
+    by 
+        descending COUNT
     ;
 run;
