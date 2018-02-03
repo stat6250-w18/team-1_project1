@@ -38,43 +38,51 @@ footnote1
 ;
 
 footnote2
-'Based on the above output, there are no states where the states where female homicide victims outnumber male homicide victims.'
-;
-
-footnote2
-'Based on gender profiling of homicide victims, states should take effective measures to curtail male homicides.'
+'Based on the above output, there are no states where female homicide victims outnumber male homicide victims.'
 ;
 
 footnote3
-'Based on the above output, California ranks highest with the most number of male as well as female homicide victims.'
+'Based on gender profiling of homicide victims, states should take effective measures to curtail male homicides.'
 ;
 
 footnote4
-'Based on the above output, Maine(85%) and North Dakota(71%) have the highest percentage of female homicide victims among all states'
+'Based on the above output, California ranks highest with the most number of male as well as female homicide victims.'
 ;
 
 footnote5
-'Further analysis is required to understand why is certain states the gender of homicide victims is unknown.'
+'Further analysis is required to understand why in certain states the gender of homicide victims is unknown.'
 ;
 *
-Methodology: Use PROC FREQ to calculate the frequency of the homicide victims in
-regards to Victim_Sex by State.
+Methodology: Use PROC FREQ to calculate the frequency of the homicide victims 
+in regards to Victim_Sex by State. Also, use PROC PRINT to print the top 5 
+states with maximum male and female homicide victims.
 
 Limitations: This methodology does not account for states with missing data,
 nor does it attempt to validate data in any way. 
 
 
-Possible Follow-up Steps: More carefully clean the values of the variable
-Victim_Age so that the statistics computed do not include any
-possible illegal values, and better handle missing data.
+Possible Follow-up Steps: We need to also consider this statistics in relation
+to the population of males/females in the states in terms of percentage. That 
+would shed more insights into profiling homicide victims per state based on 
+sex.
 ;
 proc freq
         data=homicide_analytic_file
     ;
     table
-        Victim_Sex*State
-        / missing norow nocol nopercent
+        Victim_Sex*State 
+        / missing norow nocol
     ;
+run;
+
+proc print
+    data=homicide_freq_sex_M(obs=5)
+    ; 
+run;
+
+proc print
+    data=homicide_freq_sex_F(obs=5)
+    ; 
 run;
 title;
 footnote;
@@ -100,16 +108,15 @@ footnote2
 footnote3
 "Except, West Virginia which has the minimum homicide victim age as 1, minimum victim age is 0 for all other states."
 ;
-
 *
 Methodology: Compute PROC MEANS(MIN) by class State and Victim_Age variable
 
 Limitations: This methodology does not account for states with missing data,
 nor does it attempt to validate data in any way.
 
-Possible Follow-up Steps: More carefully clean the values of the variable
-Victim_Age so that the statistics computed do not include any
-possible illegal values, and better handle missing data.
+Possible Follow-up Steps: We need to also consider this statistics in relation
+to the population of infants in the states in terms of percentage. That would 
+shed more information/insights into the infant homicide victims per state.
 ;
 proc means
     min
@@ -121,9 +128,6 @@ proc means
     var
         Victim_Age
 	;
-	output
-		out=homicide_analytic_file_temp
-    ;
 run;
 title;
 footnote;
@@ -139,34 +143,25 @@ title2
 ;
 
 footnote1
-"Based on the output, the most number of homicide victims are likely to be white, followed by black."
+'Based on the output, the most number of homicide victims are likely to be white(54.49%), followed by black(42.65%).'
 ;
 
 footnote2
-'Among all states, California has the highest number of white homicide victims(12056) follwed by Texas(7666)'
-;
-
-footnote3
-'mong all states, California and New York have the highest number of black homicide victims(5216)'
-;
-
-footnote4
 'About 60% of the total homicide victims combining all states are of Non-Hispanic ethnicity.'
-;
-
-footnote5
-'There are a large number of homicide victims (31072)whose ethnicity is unknown.'
 ;
 *
 Methodology: Use PROC FREQ to calculate the frequency of the homicide victims
-in regards to Victim_Race Victim_Ethnicity by State.
+in regards to Victim_Race and Victim_Ethnicity by State. Also, use PROC PRINT 
+to print the top 5 states with maximum white, black, Non-Hispanic homicide 
+victims.
 
 Limitations: This methodology does not account for states with missing data,
 nor does it attempt to validate data in any way.
 
-Possible Follow-up Steps: More carefully clean the values of the variable
-Victim_Age so that the statistics computed do not include any
-possible illegal values, and better handle missing data.
+Possible Follow-up Steps: We need to also consider this statistics in relation
+to total black, white and Non-Hispanic population in the states in terms of 
+percentage. That would shed more insights into profiling homicide victims per
+state based on race and ethnicity.
 ;
 proc freq
         data=homicide_analytic_file
@@ -174,9 +169,23 @@ proc freq
     tables
         Victim_Race*State 
         Victim_Ethnicity*State
-        / missing norow nocol nopercent
+        / missing norow nocol
     ;
+run;
+
+proc print
+    data=homicide_freq_victim_white(obs=5)
+    ; 
+run;
+
+proc print
+    data=homicide_freq_victim_black(obs=5)
+    ; 
+run;
+
+proc print
+    data=homicide_freq_victim_nonhispanic(obs=5)
+    ; 
 run;
 title;
 footnote;
-
