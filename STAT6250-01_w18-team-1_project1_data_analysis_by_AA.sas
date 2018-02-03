@@ -128,9 +128,6 @@ proc means
     var
         Victim_Age
 	;
-	output
-		out=homicide_analytic_file_infant
-    ;
 run;
 title;
 footnote;
