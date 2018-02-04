@@ -290,3 +290,66 @@ proc sort
         descending COUNT
     ;
 run;
+
+
+*
+Use PROC FREQ to compute the frequency and percentage of subcategories like 
+State, Relationship, Crime_Soved and output the results to a temporary dataset,
+and use PROC SORT to extract and sort by row percentages in descending order 
+of the temporary dateset, which will be used as part of data analysis by CN.
+;
+
+proc freq
+        data=homicide_analytic_file
+		    noprint
+    ;
+    table
+        State / out=FreqCountState  list
+    ;
+run;
+
+proc sort
+    data=FreqCountState
+	    out=FreqCountState_Desc
+	;
+	by
+	    descending percent
+	;
+run;
+
+proc freq
+        data=homicide_analytic_file
+		    noprint
+    ;
+    table
+        Relationship / out=FreqCountRel  list
+    ;
+run;
+
+proc sort
+    data=FreqCountRel
+	    out=FreqCountRel_Desc
+	;
+	by
+	    descending percent
+	;
+run;
+
+proc freq 
+    data=homicide_analytic_file 
+        noprint
+    ;
+    table
+        state*crime_solved 
+        / out=State_Crime_Solved list
+    ;
+run;
+
+proc sort 
+    data=State_Crime_Solved
+        out=State_Crime_Solved_Desc
+    ; 
+    by 
+        descending percent
+    ;
+run;
