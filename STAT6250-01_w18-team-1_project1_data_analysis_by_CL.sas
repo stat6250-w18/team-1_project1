@@ -22,7 +22,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 * load external file that generates analytic dataset homicide_analytic_file;
-%include '.\STAT6250-01_w18-team-0_project1_data_preparation.sas';
+%include '.\STAT6250-01_w18-team-1_project1_data_preparation.sas';
 
 
 
